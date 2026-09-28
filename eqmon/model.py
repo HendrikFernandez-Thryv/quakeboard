@@ -110,6 +110,18 @@ class Quake(object):
         return 0
 
 
+def humanize_span(seconds):
+    """A bare duration, for phrases like "3h earlier"."""
+    seconds = int(abs(seconds))
+    if seconds < 60:
+        return "%ds" % seconds
+    if seconds < 3600:
+        return "%dm" % (seconds // 60)
+    if seconds < 172800:
+        return "%dh" % (seconds // 3600)
+    return "%dd" % (seconds // 86400)
+
+
 def humanize_age(seconds):
     seconds = int(seconds)
     if seconds < 60:
