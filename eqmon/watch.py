@@ -8,6 +8,7 @@ remembered on disk, so restarting does not re-announce them.
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -128,12 +129,27 @@ def _line(quake, home=None):
         humanize_age(quake.age_seconds()), extra)
 
 
+def _install_term_handler():
+    """Treat SIGTERM like Ctrl-C, so a service manager gets a clean stop."""
+    def handler(signum, frame):
+        raise KeyboardInterrupt
+    try:
+        signal.signal(signal.SIGTERM, handler)
+    except (ValueError, OSError):        # not on the main thread
+        pass
+
+
 def run(opts, stream=sys.stdout):
     """Poll until interrupted. Returns an exit code."""
+    _install_term_handler()
     try:
+        # The home radius only applies when it was explicitly asked for with
+        # --near; having a home set should not silently narrow the watch.
+        near = getattr(opts, "near", False)
         flt = Filter(min_mag=opts.watch_mag,
                      region_names=opts.watch_regions,
-                     home=opts.home, radius_km=opts.home_radius_km)
+                     home=opts.home if near else None,
+                     radius_km=opts.home_radius_km if near else None)
     except ValueError as exc:
         stream.write("%s\n" % exc)
         return 2
