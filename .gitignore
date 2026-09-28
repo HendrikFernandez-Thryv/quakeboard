@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+
+# CSV exports written by the `e` key
+quakes-*.csv
+
+.DS_Store
