@@ -1,0 +1,63 @@
+# Publishes the web app (web/index.html) to GitHub Pages.
+#
+# It runs on every push to main that touches web/, and can be started by hand
+# from the Actions tab. Nothing is published unless the checks pass: the
+# committed index.html must match what tools/build_web.py builds from web/src,
+# and the Node tests must be green. Only index.html is published, not the
+# sources or the test fixtures.
+name: Deploy web app to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deployment finish rather than cancelling it halfway.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Check that web/index.html is built from web/src
+        run: python3 tools/build_web.py --check
+
+      - name: Test the web app
+        run: node --test web/test/*.test.js
+
+      - name: Collect the site
+        run: |
+          mkdir _site
+          cp web/index.html _site/index.html
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
