@@ -1,0 +1,83 @@
+/* Design tokens. Dark is the designed-for theme; light overrides it. The
+   magnitude ramp is one orange hue, stepped in lightness (validated), and is
+   always backed by marker size and a printed number - never colour alone. */
+:root {
+  --is-dark: 1;
+  color-scheme: dark;
+
+  --bg: #060a14;           --bg-rgb: 6 10 20;
+  --surface: #0d1426;      --surface-rgb: 13 20 38;
+  --surface-2: #121b33;
+  --surface-3: #19243f;
+  --ink: #eef2fb;          --ink-rgb: 238 242 251;
+  --ink-2: #b7c2da;
+  --ink-3: #8f9cba;
+  --line: rgb(150 172 230 / .14);
+  --line-2: rgb(150 172 230 / .26);
+  --accent: #5cc8ff;       --accent-rgb: 92 200 255;
+  --accent-ink: #04202f;
+
+  /* Magnitude tiers: m0 is below M4 (de-emphasised), m1..m4 are M4, M5, M6, M7+ */
+  --m0: #7f8cab;  --m0-rgb: 127 140 171;
+  --m1: #c84a1c;  --m1-rgb: 200 74 28;
+  --m2: #f06f26;  --m2-rgb: 240 111 38;
+  --m3: #ff9d52;  --m3-rgb: 255 157 82;
+  --m4: #ffcea3;  --m4-rgb: 255 206 163;
+
+  /* Status: fixed in both themes, always shown with an icon and a label */
+  --ok: #0ca30c;     --ok-rgb: 12 163 12;
+  --warn: #fab219;   --warn-rgb: 250 178 25;
+  --serious: #ec835a; --serious-rgb: 236 131 90;
+  --bad: #d03b3b;    --bad-rgb: 208 59 59;
+
+  /* Canvas colours (read by the map and seismograph) */
+  --cv-ocean-a: #15305c;  --cv-ocean-b: #070d1d;
+  --cv-land: #8ec5ff;     --cv-land-fill: #8ec5ff;
+  --cv-coast: #a9d6ff;    --cv-grid: #9db8ff;
+  --cv-night: #000000;
+
+  --shadow: 0 1px 0 rgb(255 255 255 / .03) inset, 0 12px 40px rgb(0 0 0 / .4);
+  --shadow-lg: 0 30px 90px rgb(0 0 0 / .6);
+  --aurora-a: rgb(92 200 255 / .13);
+  --aurora-b: rgb(240 111 38 / .09);
+
+  --r: 18px;  --r-sm: 12px;
+  --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.3, 1.3, .4, 1);
+  --stage-h: clamp(520px, calc(100dvh - 350px), 820px);
+}
+
+:root[data-theme="light"] {
+  --is-dark: 0;
+  color-scheme: light;
+
+  --bg: #edf0f7;           --bg-rgb: 237 240 247;
+  --surface: #ffffff;      --surface-rgb: 255 255 255;
+  --surface-2: #f3f6fb;
+  --surface-3: #e8edf6;
+  --ink: #0c1324;          --ink-rgb: 12 19 36;
+  --ink-2: #44506c;
+  --ink-3: #5f6b88;
+  --line: rgb(12 19 36 / .11);
+  --line-2: rgb(12 19 36 / .22);
+  --accent: #0a6fc2;       --accent-rgb: 10 111 194;
+  --accent-ink: #ffffff;
+
+  --m0: #8b96b0;  --m0-rgb: 139 150 176;
+  --m1: #ee8f45;  --m1-rgb: 238 143 69;
+  --m2: #dd6420;  --m2-rgb: 221 100 32;
+  --m3: #b94310;  --m3-rgb: 185 67 16;
+  --m4: #7d2a0a;  --m4-rgb: 125 42 10;
+
+  --cv-ocean-a: #e4eefc;  --cv-ocean-b: #bdcfee;
+  --cv-land: #2f4f88;     --cv-land-fill: #2f4f88;
+  --cv-coast: #27457a;    --cv-grid: #3a5a94;
+  --cv-night: #000000;
+
+  --shadow: 0 1px 0 rgb(255 255 255 / .8) inset, 0 10px 34px rgb(28 44 84 / .12);
+  --shadow-lg: 0 30px 80px rgb(28 44 84 / .28);
+  --aurora-a: rgb(10 111 194 / .13);
+  --aurora-b: rgb(221 100 32 / .09);
+}

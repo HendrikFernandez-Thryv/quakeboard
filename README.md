@@ -1,15 +1,19 @@
 # quakeboard
 
-A terminal earthquake monitor. An auto-updating board of the latest detected
-events sits at the top of the screen; below it you can search past earthquakes
-by country or region, pull up the aftershock sequence around any event, see
-whether a region's recent activity is unusual, and plot it all on a world map.
+A live earthquake monitor, as a terminal app and as an animated single-page web
+app. An auto-updating board of the latest detected events sits at the top;
+below it you can search past earthquakes by country or region, pull up the
+aftershock sequence around any event, see whether a region's recent activity
+is unusual, and plot it all on a world map.
+
+- **Terminal:** `./quakeboard` — Python standard library only. See [Quick start](#quick-start-terminal).
+- **Web:** `web/index.html` — one self-contained file. See [Web app](#web-app).
 
 Data comes from the [USGS earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/).
 No API key, no account, no third-party packages — Python 3.6+ and its standard
 library are all you need.
 
-## Quick start
+## Quick start (terminal)
 
 ```bash
 ./quakeboard
@@ -26,7 +30,74 @@ the key list, `q` to quit.
 ./quakeboard --watch --watch-mag 6      # notify me, don't take over my screen
 ```
 
-## Keys
+## Web app
+
+`web/index.html` is the same monitor as a single page: one self-contained file
+with no server, no install and no dependencies. Open it in a browser, or serve
+the folder:
+
+```bash
+open web/index.html                   # macOS; or just double-click it
+python3 -m http.server -d web 8000    # then visit http://localhost:8000
+```
+
+**What you get**
+
+- **A live, animated board.** Events arrive from the USGS on a countdown ring
+  (15 s to 5 min), new ones slide in flagged `NEW`, and everything that changes
+  does so without the list jumping: rows are reused by event id and the ones
+  pushed down glide to their new place.
+- **A dotted 3-D globe** you can drag and scroll, with a live day/night
+  terminator, atmosphere glow, and shockwave rings that ripple across the
+  surface when an event lands. Or switch to a flat Mercator map that pans,
+  zooms and frames whatever you searched.
+- **A seismograph strip** that scrolls continuously and fires a P-wave then a
+  longer S-wave for each real event, sized by magnitude and tinted by tier. It
+  is an illustration driven by live data, not a recording, and says so.
+- **A timelapse replay** of the current window: events appear in order with
+  their shockwaves while the seismograph plays along, with a scrubber.
+- **Search** by country or region (179 of them, with aliases, partial names
+  and misspellings — `japn` finds Japan and says it guessed), type-ahead
+  suggestions, and a text fallback for place names outside the gazetteer.
+- **Near me**, using a circle rather than a box, from coordinates you type or
+  the browser's location if you click for it. It never leaves your browser.
+- **Aftershock sequences** with a magnitude-over-time scatter, per-day counts,
+  the decay verdict and the Båth's-law size gap; and **"how unusual is this?"**
+  against the past year. The charts all have a table view.
+- **Alerts** for new events above a magnitude you choose: an in-page toast, an
+  optional synthesised rumble, and optional desktop notifications while the tab
+  is open.
+- **Saved searches** on keys `1`–`9`, CSV export, shareable URLs
+  (`#q=japan&m=5&d=90`), light and dark themes, a reduced-motion mode that
+  turns the movement off, and a full keyboard map (press `?`).
+
+It works offline-ish: recent responses are kept in the browser, so if the
+network drops the board keeps showing the last data, labelled `CACHED`.
+
+**How it differs from the terminal app.** The gazetteer, the aftershock radius
+and verdict wording, and the activity comparison are the same code ported to
+JavaScript, and 88 region queries plus every analysis string are checked against
+the Python by tests. Two deliberate differences: a known name inside a longer
+query must be a whole word of three or more letters and the most specific one
+wins (so `andrew` is no longer the Dominican Republic and `all of japan` is not
+"worldwide"), and the live board below M4.5 queries the FDSN service for just
+what is shown instead of downloading the whole feed and filtering it.
+
+**Privacy.** The only network requests are to `earthquake.usgs.gov`. There is no
+analytics, no third-party script or font, and no server. Settings, saved
+searches and a few cached responses live in your browser's `localStorage`.
+
+**Working on it.** The page is assembled from `web/src/` by a small script:
+
+```bash
+python3 tools/build_web.py            # write web/index.html
+python3 tools/build_web.py --check    # fail if index.html is out of date
+node --test web/test/*.test.js        # 95 tests, no network needed
+python3 tools/build_webdata.py        # regenerate the gazetteer and coastlines
+python3 tools/gen_web_fixtures.py     # regenerate what the tests compare against
+```
+
+## Terminal keys
 
 | Key | Action |
 | --- | --- |
@@ -249,19 +320,33 @@ eqmon/ui.py             curses interface
 eqmon/plain.py          plain-text output
 eqmon/watch.py          notification daemon
 eqmon/cli.py            argument parsing
-tools/build_mapdata.py  regenerates the land mask from Natural Earth data
-test_quakeboard.py      tests
+tools/build_mapdata.py  regenerates the terminal app's land mask
+test_quakeboard.py      tests for the terminal app
+
+web/index.html          the web app: one file, built from web/src (committed)
+web/src/core.js         geo maths, gazetteer matching, USGS client, analysis (no DOM)
+web/src/land.js         coastlines: decode, unwrap at the antimeridian, rasterise
+web/src/fx-*.js         animation: seismograph, globe and flat map, charts
+web/src/app-*.js        the interface: list, detail, dialogs, orchestration
+web/src/css/            design tokens and styles, dark and light
+web/src/template.html   page skeleton and icon sprite
+web/test/               Node tests, incl. parity with the Python via fixtures
+tools/build_web.py      assembles web/index.html
+tools/build_webdata.py  generates web/src/gazetteer.js and landdata.js
+tools/gen_web_fixtures.py  writes web/test/fixtures.json from the Python app
 ```
 
 ## Tests
 
 ```bash
-python3 test_quakeboard.py          # 59 offline tests
-python3 test_quakeboard.py --net    # also hits the live USGS service
+python3 test_quakeboard.py            # 63 offline tests for the terminal app
+python3 test_quakeboard.py --net      # also hits the live USGS service
+node --test web/test/*.test.js        # 95 tests for the web app
 ```
 
 ## Credits
 
 Earthquake data from the [U.S. Geological Survey](https://earthquake.usgs.gov/).
 Coastlines from [Natural Earth](https://www.naturalearthdata.com/) 1:110m land
-(public domain), via `world-atlas`, baked into `eqmon/mapdata.py` at build time.
+(public domain), via `world-atlas`, baked into `eqmon/mapdata.py` and `web/src/landdata.js`
+at build time.

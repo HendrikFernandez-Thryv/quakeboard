@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quakeboard — live earthquake monitor</title>
+<meta name="description" content="A live, animated earthquake board. Watch events arrive from the USGS, search any country or region, follow aftershock sequences, and see whether activity is unusual.">
+<meta name="theme-color" content="#060a14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060a14'/%3E%3Cpath d='M3 17h6l3-9 5 17 4-12 2 4h6' fill='none' stroke='%235cc8ff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>
+/* Set the theme before first paint, so there is no flash of the wrong one. */
+(function () {
+  var root = document.documentElement, dark = true;
+  try {
+    var s = JSON.parse(localStorage.getItem('quakeboard.settings.v1') || '{}'), pref = s.theme || 'system';
+    dark = pref === 'dark' || (pref === 'system' && !matchMedia('(prefers-color-scheme: light)').matches);
+    if (s.motion) root.dataset.motion = s.motion;
+  } catch (e) {}
+  root.dataset.theme = dark ? 'dark' : 'light';
+})();
+</script>
+<style>
+/*@STYLE@*/
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+<symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8 8 0 0 1 9.8 4a8 8 0 1 0 10.2 10.2z"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2-2.4 3.5"/><circle cx="12" cy="17.2" r=".7" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 2.8 4.5 5.8 4.5 9s-1.5 6.2-4.5 9c-3-2.8-4.5-5.8-4.5-9S9 5.8 12 3z"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="m3 6.5 6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.9v14.2a.6.6 0 0 0 .9.5l11.4-7.1a.6.6 0 0 0 0-1L7.9 4.4a.6.6 0 0 0-.9.5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor" stroke="none"/><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+<symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4.5h5.5V10M19.5 4.5 11 13M17 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 5 18.5v-9A1.5 1.5 0 0 1 6.5 8H11"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/></symbol>
+<symbol id="i-star-fill" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 17l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="currentColor"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15zM10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4.2h-4.2"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.8 19.5h18.4z"/><path d="M12 10v4.5"/><circle cx="12" cy="17" r=".7" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 13 2.5-7H21"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c0-3.2 2.7-5.3 6-5.3s6 2.1 6 5.3M16 5.8a3.2 3.2 0 0 1 0 5.4M18 14.2c2 .6 3.3 2.2 3.3 4.8"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8 7.5 9.5 4.4-1.5 7.5-4.9 7.5-9.5V6z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-spin" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="m20.5 3.5-.4 4.2-4.2-.6"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.8h5V7M6.5 7l.8 12.2h9.4L17.5 7"/></symbol>
+<symbol id="i-offline" viewBox="0 0 24 24"><path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5.3 12.6a9.5 9.5 0 0 1 3.4-2.2M18.7 12.6a9.4 9.4 0 0 0-5.1-2.5"/><circle cx="12" cy="19.6" r=".7" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-5.6 6.5-11a6.5 6.5 0 0 0-13 0c0 5.4 6.5 11 6.5 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M3.5 10h17M9.5 5v14"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="M4.5 9.5v5h3.5l4.5 3.8V5.7L8 9.5z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+<symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 3.5 6.5 19.5 12 16l5.5 3.5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1M3.5 4.5v4.2h4.2M12 7.5V12l3 2"/></symbol>
+<symbol id="i-sort" viewBox="0 0 24 24"><path d="M8 5v14M4.5 15.5 8 19l3.5-3.5M16 19V5M12.5 8.5 16 5l3.5 3.5"/></symbol>
+</defs>
+</svg>
+
+<div class="bg" aria-hidden="true"><i class="bg-a"></i><i class="bg-b"></i></div>
+
+<a class="skip-link" href="#kpis">Skip to the data</a>
+
+<header class="topbar" id="topbar">
+  <h1 class="sr-only">Quakeboard, a live earthquake monitor</h1>
+  <a class="brand" href="#" id="brand" aria-label="Quakeboard — home">
+    <svg class="brand-mark" viewBox="0 0 44 28" aria-hidden="true"><path class="bm-line" d="M2 14h9l4-9 6 18 5-14 3 5h13"/></svg>
+    <span class="brand-name">Quake<b>board</b></span>
+  </a>
+
+  <form class="search" id="search" role="search" autocomplete="off" novalidate>
+    <svg class="ico" aria-hidden="true"><use href="#i-search"/></svg>
+    <input id="q" name="q" type="text" inputmode="search" enterkeyhint="search" placeholder="Search a country or region…"
+           aria-label="Search a country or region" role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list"
+           spellcheck="false" autocapitalize="off" autocorrect="off">
+    <kbd class="kbd" aria-hidden="true">/</kbd>
+    <button type="button" class="chip-btn" id="btn-near" aria-label="Search near me" title="Search near me (N)">
+      <svg class="ico" aria-hidden="true"><use href="#i-locate"/></svg><span>Near me</span>
+    </button>
+    <ul class="suggest" id="suggest" role="listbox" hidden></ul>
+  </form>
+
+  <div class="top-actions">
+    <button class="live" id="live" type="button" data-state="ok" title="Refresh now (R)" aria-label="Refresh the live board now">
+      <svg class="ring" viewBox="0 0 26 26" aria-hidden="true"><circle class="track" cx="13" cy="13" r="10"/><circle class="prog" cx="13" cy="13" r="10"/></svg>
+      <span class="live-txt">
+        <span class="live-state"><i></i><span id="live-state">LIVE</span></span>
+        <span class="live-meta" id="live-meta">connecting…</span>
+      </span>
+    </button>
+    <button class="icon-btn" id="btn-theme" type="button" aria-label="Switch theme" title="Switch theme"><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg></button>
+    <button class="icon-btn" id="btn-settings" type="button" aria-label="Settings" title="Settings"><svg class="ico" aria-hidden="true"><use href="#i-sliders"/></svg></button>
+    <button class="icon-btn" id="btn-help" type="button" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><svg class="ico" aria-hidden="true"><use href="#i-help"/></svg></button>
+  </div>
+</header>
+
+<nav class="saved" id="saved" aria-label="Saved searches" hidden>
+  <span class="overline saved-label">Saved</span>
+  <div class="saved-chips" id="saved-chips"></div>
+</nav>
+
+<section class="seismo wrap rise" id="seismo" aria-hidden="true" style="--i:0">
+  <canvas id="cv-seismo"></canvas>
+  <span class="seismo-cap">Illustrative trace · driven by live USGS events</span>
+</section>
+
+<section class="kpis wrap" id="kpis" aria-label="Summary of the current view" tabindex="-1">
+  <article class="tile tile-hero card has-spark rise" style="--i:1">
+    <h2 class="tile-label" id="k-events-label">Events</h2>
+    <p class="hero" id="k-events">–</p>
+    <p class="tile-sub" id="k-events-sub">loading…</p>
+    <div class="tile-spark" id="k-events-spark"></div>
+  </article>
+  <article class="tile card rise" style="--i:2" id="tile-max">
+    <h2 class="tile-label">Strongest</h2>
+    <p class="tile-value"><i class="tile-mark" id="k-max-mark" hidden></i><span id="k-max">–</span></p>
+    <p class="tile-sub" id="k-max-sub">&nbsp;</p>
+  </article>
+  <article class="tile card has-spark rise" style="--i:3">
+    <h2 class="tile-label">Past hour</h2>
+    <p class="tile-value" id="k-hour">–</p>
+    <p class="tile-sub" id="k-hour-sub">events</p>
+    <div class="tile-spark" id="k-hour-spark"></div>
+  </article>
+  <article class="tile card rise" style="--i:4">
+    <h2 class="tile-label">Deepest</h2>
+    <p class="tile-value" id="k-deep">–</p>
+    <p class="tile-sub" id="k-deep-sub">&nbsp;</p>
+  </article>
+</section>
+
+<main class="layout wrap">
+  <section class="stage card rise" id="stage" data-mode="globe" style="--i:5" aria-label="Map of events">
+    <div class="stage-canvases" id="stage-canvases"><canvas id="cv-globe"></canvas><canvas id="cv-flat"></canvas></div>
+
+    <div class="hud hud-tl">
+      <p class="overline hud-kicker" id="hud-kicker"><i></i><span>Live</span></p>
+      <h2 class="hud-title" id="hud-title">M4.0+ · last 24 hours</h2>
+      <p class="hud-sub" id="hud-sub"></p>
+      <div class="legend glass" id="legend" aria-label="Magnitude scale"></div>
+    </div>
+
+    <div class="hud hud-tr">
+      <div class="seg seg-ico" id="seg-mode" role="group" aria-label="Map style">
+        <i class="thumb"></i>
+        <button type="button" data-v="globe" aria-pressed="true"><svg class="ico" aria-hidden="true"><use href="#i-globe"/></svg><span>Globe</span></button>
+        <button type="button" data-v="flat" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-map"/></svg><span>Flat</span></button>
+      </div>
+      <button class="icon-btn" id="btn-spin" type="button" aria-pressed="true" aria-label="Auto-rotate the globe" title="Auto-rotate"><svg class="ico" aria-hidden="true"><use href="#i-spin"/></svg></button>
+      <button class="icon-btn" id="btn-fit" type="button" aria-label="Reset the view" title="Reset the view"><svg class="ico" aria-hidden="true"><use href="#i-fit"/></svg></button>
+    </div>
+
+    <div class="hud hud-bl">
+      <div class="replay glass" id="replay">
+        <button class="btn btn-sm" id="rp-start" type="button"><svg class="ico" aria-hidden="true"><use href="#i-history"/></svg>Replay</button>
+        <div class="rp-live">
+          <button class="icon-btn" id="rp-toggle" type="button" aria-label="Pause"><svg class="ico" aria-hidden="true"><use href="#i-pause"/></svg></button>
+          <input class="scrub" id="rp-scrub" type="range" min="0" max="1000" value="0" aria-label="Replay position">
+          <span class="clock" id="rp-clock">–</span>
+          <button class="icon-btn" id="rp-stop" type="button" aria-label="Stop the replay"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud hud-br"><div class="zoom glass">
+      <button class="icon-btn" id="btn-zin" type="button" aria-label="Zoom in"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></button>
+      <button class="icon-btn" id="btn-zout" type="button" aria-label="Zoom out"><svg class="ico" aria-hidden="true"><use href="#i-minus"/></svg></button>
+    </div></div>
+
+    <div class="tip" id="map-tip" role="tooltip"></div>
+    <p class="stage-note glass" id="stage-note" hidden></p>
+  </section>
+
+  <section class="panel card rise" id="panel" style="--i:6">
+    <div class="panel-head">
+      <div class="tabs" id="tabs" role="tablist" aria-label="Views">
+        <button class="tab" role="tab" id="tab-board" type="button" aria-selected="true" aria-controls="view-board">Live board <span class="count" id="count-board">0</span></button>
+        <button class="tab" role="tab" id="tab-search" type="button" aria-selected="false" aria-controls="view-search">Search <span class="count" id="count-search">–</span></button>
+        <i class="tab-ink" id="tab-ink"></i>
+      </div>
+      <div class="panel-tools">
+        <button class="icon-btn" id="btn-save" type="button" aria-label="Save this search" title="Save this search" hidden><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></button>
+        <button class="icon-btn" id="btn-context" type="button" aria-label="How unusual is this activity?" title="How unusual is this? (X)"><svg class="ico" aria-hidden="true"><use href="#i-activity"/></svg></button>
+        <button class="icon-btn" id="btn-export" type="button" aria-label="Export as CSV" title="Export as CSV (E)"><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg></button>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="views" id="views">
+        <div class="view" id="view-board" role="tabpanel" aria-labelledby="tab-board">
+          <div class="filters">
+            <label class="filter"><span>Magnitude ≥</span><input id="f-board-mag" type="range" min="2.5" max="7" step="0.1" aria-label="Board minimum magnitude"><span class="val" id="f-board-mag-v">4.0</span></label>
+            <div class="seg" id="seg-period" role="group" aria-label="Board time window"><i class="thumb"></i>
+              <button type="button" data-v="hour">1h</button><button type="button" data-v="day">24h</button><button type="button" data-v="week">7d</button><button type="button" data-v="month">30d</button>
+            </div>
+          </div>
+          <div class="statusline" id="board-status"></div>
+          <ul class="list" id="list-board" role="listbox" aria-label="Live board events"></ul>
+        </div>
+
+        <div class="view" id="view-search" role="tabpanel" aria-labelledby="tab-search" hidden>
+          <div class="filters">
+            <label class="filter"><span>Magnitude ≥</span><input id="f-search-mag" type="range" min="1" max="7" step="0.1" aria-label="Search minimum magnitude"><span class="val" id="f-search-mag-v">2.5</span></label>
+            <div class="seg" id="seg-days" role="group" aria-label="Days of history"><i class="thumb"></i>
+              <button type="button" data-v="1">1d</button><button type="button" data-v="7">7d</button><button type="button" data-v="30">30d</button><button type="button" data-v="90">90d</button><button type="button" data-v="365">1y</button>
+            </div>
+            <label class="filter filter-check"><span class="switch"><input type="checkbox" id="f-strict"><span></span></span><span title="Keep only events whose place name contains your search">Strict name match</span></label>
+            <label class="filter" id="f-radius-wrap" hidden><span>Radius</span><input id="f-radius" type="range" min="50" max="2000" step="50" aria-label="Search radius in kilometres"><span class="val" id="f-radius-v">300</span></label>
+          </div>
+          <div class="statusline" id="search-status"></div>
+          <ul class="list" id="list-search" role="listbox" aria-label="Search results"></ul>
+        </div>
+      </div>
+
+      <aside class="detail" id="detail" aria-hidden="true" aria-label="Event detail">
+        <div class="detail-head">
+          <button class="icon-btn" id="d-back" type="button" aria-label="Back to the list"><svg class="ico" aria-hidden="true"><use href="#i-back"/></svg></button>
+          <span class="overline grow">Event</span>
+          <button class="icon-btn" id="d-copy" type="button" aria-label="Copy a link to this event" title="Copy link"><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg></button>
+        </div>
+        <div class="detail-scroll" id="detail-scroll"></div>
+      </aside>
+    </div>
+
+    <footer class="panel-foot">
+      Data: <a href="https://earthquake.usgs.gov/" target="_blank" rel="noopener noreferrer">USGS Earthquake Hazards Program</a>.
+      Magnitudes are as reported (Mw, mb, ml…), not strictly Richter. A tsunami flag here is not an official warning — see
+      <a href="https://www.tsunami.gov/" target="_blank" rel="noopener noreferrer">tsunami.gov</a>.
+    </footer>
+  </section>
+</main>
+
+<dialog class="modal" id="dlg-context" aria-labelledby="ctx-title">
+  <div class="modal-head"><div><h2 class="modal-title" id="ctx-title">How unusual is this?</h2><p class="modal-sub" id="ctx-sub"></p></div>
+    <button class="icon-btn" type="button" data-close aria-label="Close"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+  <div class="modal-body" id="ctx-body"></div>
+</dialog>
+
+<dialog class="modal" id="dlg-settings" aria-labelledby="set-title">
+  <div class="modal-head"><div><h2 class="modal-title" id="set-title">Settings</h2><p class="modal-sub">Saved in this browser only. Nothing is sent anywhere but the USGS.</p></div>
+    <button class="icon-btn" type="button" data-close aria-label="Close"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+  <div class="modal-body" id="set-body"></div>
+</dialog>
+
+<dialog class="modal" id="dlg-help" aria-labelledby="help-title">
+  <div class="modal-head"><div><h2 class="modal-title" id="help-title">Keyboard shortcuts</h2><p class="modal-sub">Everything on screen can be done from the keyboard.</p></div>
+    <button class="icon-btn" type="button" data-close aria-label="Close"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+  <div class="modal-body"><div class="keys" id="help-keys"></div></div>
+</dialog>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<div class="chart-tip" id="chart-tip" role="tooltip"></div>
+<div class="sr-only" id="sr-live" aria-live="polite"></div>
+
+<script>
+/*@SCRIPT@*/
+</script>
+</body>
+</html>

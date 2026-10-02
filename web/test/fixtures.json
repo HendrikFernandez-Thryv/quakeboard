@@ -1,0 +1,1767 @@
+{
+ "now": 1800000000.0,
+ "resolve": [
+  [
+   "japan",
+   "japan",
+   "exact"
+  ],
+  [
+   "Japan",
+   "japan",
+   "exact"
+  ],
+  [
+   "  JAPAN ",
+   "japan",
+   "exact"
+  ],
+  [
+   "chile",
+   "chile",
+   "exact"
+  ],
+  [
+   "united states",
+   "united states",
+   "exact"
+  ],
+  [
+   "usa",
+   "united states",
+   "exact"
+  ],
+  [
+   "US",
+   "united states",
+   "exact"
+  ],
+  [
+   "u.s.",
+   "united states",
+   "exact"
+  ],
+  [
+   "uk",
+   "united kingdom",
+   "exact"
+  ],
+  [
+   "nz",
+   "new zealand",
+   "exact"
+  ],
+  [
+   "new zealand",
+   "new zealand",
+   "exact"
+  ],
+  [
+   "NZ",
+   "new zealand",
+   "exact"
+  ],
+  [
+   "türkiye",
+   "turkey",
+   "exact"
+  ],
+  [
+   "Turkey",
+   "turkey",
+   "exact"
+  ],
+  [
+   "turkiye",
+   "turkey",
+   "exact"
+  ],
+  [
+   "persia",
+   "iran",
+   "exact"
+  ],
+  [
+   "burma",
+   "myanmar",
+   "exact"
+  ],
+  [
+   "myanmar",
+   "myanmar",
+   "exact"
+  ],
+  [
+   "philippines",
+   "philippines",
+   "exact"
+  ],
+  [
+   "philipines",
+   "philippines",
+   "guess"
+  ],
+  [
+   "philipnes",
+   "philippines",
+   "guess"
+  ],
+  [
+   "chili",
+   "chile",
+   "guess"
+  ],
+  [
+   "chille",
+   "chile",
+   "guess"
+  ],
+  [
+   "indonesa",
+   "indonesia",
+   "guess"
+  ],
+  [
+   "grece",
+   "greece",
+   "guess"
+  ],
+  [
+   "italy",
+   "italy",
+   "exact"
+  ],
+  [
+   "itly",
+   "italy",
+   "guess"
+  ],
+  [
+   "jap",
+   "japan",
+   "partial"
+  ],
+  [
+   "aege",
+   "aegean",
+   "exact"
+  ],
+  [
+   "philip",
+   "philippines",
+   "exact"
+  ],
+  [
+   "indo",
+   "indonesia",
+   "exact"
+  ],
+  [
+   "new z",
+   "new zealand",
+   "exact"
+  ],
+  [
+   "united",
+   "united states",
+   "exact"
+  ],
+  [
+   "south",
+   "south korea",
+   "exact"
+  ],
+  [
+   "north",
+   "north korea",
+   "exact"
+  ],
+  [
+   "mid",
+   "middle east",
+   "partial"
+  ],
+  [
+   "ring of fire",
+   "ring of fire",
+   "exact"
+  ],
+  [
+   "pacific",
+   "ring of fire",
+   "exact"
+  ],
+  [
+   "mediterranean",
+   "mediterranean",
+   "exact"
+  ],
+  [
+   "himalayas",
+   "himalayas",
+   "exact"
+  ],
+  [
+   "east african rift",
+   "east african rift",
+   "exact"
+  ],
+  [
+   "world",
+   "world",
+   "exact"
+  ],
+  [
+   "everywhere",
+   "world",
+   "exact"
+  ],
+  [
+   "tonga",
+   "tonga",
+   "exact"
+  ],
+  [
+   "fiji",
+   "fiji",
+   "exact"
+  ],
+  [
+   "alaska",
+   "alaska",
+   "exact"
+  ],
+  [
+   "california",
+   "california",
+   "exact"
+  ],
+  [
+   "hawaii",
+   "hawaii",
+   "exact"
+  ],
+  [
+   "iceland",
+   "iceland",
+   "exact"
+  ],
+  [
+   "kamchatka",
+   "kamchatka",
+   "exact"
+  ],
+  [
+   "sumatra",
+   "sumatra",
+   "exact"
+  ],
+  [
+   "java",
+   "java",
+   "exact"
+  ],
+  [
+   "bali",
+   "java",
+   "exact"
+  ],
+  [
+   "taiwan",
+   "taiwan",
+   "exact"
+  ],
+  [
+   "nepal",
+   "nepal",
+   "exact"
+  ],
+  [
+   "peru",
+   "peru",
+   "exact"
+  ],
+  [
+   "ecuador",
+   "ecuador",
+   "exact"
+  ],
+  [
+   "greece",
+   "greece",
+   "exact"
+  ],
+  [
+   "mexico city",
+   "mexico",
+   "partial"
+  ],
+  [
+   "japan earthquake",
+   "japan",
+   "partial"
+  ],
+  [
+   "chile quake",
+   "chile",
+   "partial"
+  ],
+  [
+   "atlantis",
+   "mid atlantic ridge",
+   "guess"
+  ],
+  [
+   "narnia",
+   null,
+   null
+  ],
+  [
+   "qwertyuiop",
+   null,
+   null
+  ],
+  [
+   "zzz",
+   null,
+   null
+  ],
+  [
+   "",
+   null,
+   null
+  ],
+  [
+   "   ",
+   null,
+   null
+  ],
+  [
+   "georgia",
+   "georgia country",
+   "exact"
+  ],
+  [
+   "republic of georgia",
+   "georgia country",
+   "exact"
+  ],
+  [
+   "korea",
+   "south korea",
+   "exact"
+  ],
+  [
+   "south korea",
+   "south korea",
+   "exact"
+  ],
+  [
+   "dprk",
+   "north korea",
+   "exact"
+  ],
+  [
+   "drc",
+   "democratic republic of the congo",
+   "exact"
+  ],
+  [
+   "congo",
+   "democratic republic of the congo",
+   "exact"
+  ],
+  [
+   "uae",
+   "united arab emirates",
+   "exact"
+  ],
+  [
+   "png",
+   "papua new guinea",
+   "exact"
+  ],
+  [
+   "cascadia",
+   "pacific northwest",
+   "exact"
+  ],
+  [
+   "socal",
+   "california",
+   "exact"
+  ],
+  [
+   "new madrid",
+   "new madrid",
+   "exact"
+  ],
+  [
+   "yellowstone",
+   "yellowstone",
+   "exact"
+  ],
+  [
+   "etna",
+   "etna",
+   "exact"
+  ],
+  [
+   "kuril",
+   "kuril islands",
+   "exact"
+  ],
+  [
+   "kurils",
+   "kuril islands",
+   "exact"
+  ],
+  [
+   "baltics",
+   "baltics",
+   "exact"
+  ],
+  [
+   "balkans",
+   "balkans",
+   "exact"
+  ],
+  [
+   "andes",
+   "andes",
+   "exact"
+  ],
+  [
+   "arctic",
+   "arctic",
+   "exact"
+  ],
+  [
+   "antarctica",
+   "antarctica",
+   "exact"
+  ]
+ ],
+ "normalize": [
+  [
+   "Japan",
+   "japan"
+  ],
+  [
+   "  Türkiye ",
+   "turkiye"
+  ],
+  [
+   "São Tomé",
+   "sao tome"
+  ],
+  [
+   "Côte d'Ivoire",
+   "cote d ivoire"
+  ],
+  [
+   "U.S.A.",
+   "u.s.a."
+  ],
+  [
+   "New-Zealand",
+   "new zealand"
+  ],
+  [
+   "mid-atlantic ridge",
+   "mid atlantic ridge"
+  ],
+  [
+   "  a   b  ",
+   "a b"
+  ],
+  [
+   "Ελλάδα",
+   "ελλαδα"
+  ],
+  [
+   "Zürich!",
+   "zurich"
+  ],
+  [
+   "x.y",
+   "x.y"
+  ],
+  [
+   "",
+   ""
+  ],
+  [
+   "  ",
+   ""
+  ],
+  [
+   "Ring  of   Fire",
+   "ring of fire"
+  ],
+  [
+   "Łódź",
+   "łodz"
+  ]
+ ],
+ "ratio": [
+  [
+   "japan",
+   "japn",
+   0.8888888888888888
+  ],
+  [
+   "chile",
+   "chili",
+   0.8
+  ],
+  [
+   "greece",
+   "grece",
+   0.9090909090909091
+  ],
+  [
+   "atlantic",
+   "atlantis",
+   0.875
+  ],
+  [
+   "aegean",
+   "aege",
+   0.8
+  ],
+  [
+   "",
+   "",
+   1.0
+  ],
+  [
+   "a",
+   "a",
+   1.0
+  ],
+  [
+   "abcd",
+   "dcba",
+   0.25
+  ],
+  [
+   "new zealand",
+   "new zeland",
+   0.9523809523809523
+  ],
+  [
+   "tonga",
+   "tongo",
+   0.8
+  ],
+  [
+   "philippines",
+   "philipines",
+   0.9523809523809523
+  ],
+  [
+   "kermadec",
+   "kermadek",
+   0.875
+  ]
+ ],
+ "closeMatches": [
+  [
+   "japn",
+   [
+    "japan",
+    "japanese",
+    "jordan"
+   ]
+  ],
+  [
+   "chili",
+   [
+    "chile",
+    "haiti",
+    "china"
+   ]
+  ],
+  [
+   "atlantis",
+   [
+    "atlantic",
+    "atlas mountains",
+    "baltics"
+   ]
+  ],
+  [
+   "kermadek",
+   []
+  ],
+  [
+   "zealand",
+   [
+    "new zealand",
+    "ireland",
+    "iceland"
+   ]
+  ],
+  [
+   "greec",
+   [
+    "greece",
+    "greek",
+    "crete"
+   ]
+  ]
+ ],
+ "display": [
+  [
+   "japan",
+   "Japan"
+  ],
+  [
+   "new zealand",
+   "New Zealand"
+  ],
+  [
+   "ring of fire",
+   "Pacific Ring of Fire"
+  ],
+  [
+   "georgia country",
+   "Georgia (country)"
+  ],
+  [
+   "democratic republic of the congo",
+   "DR Congo"
+  ],
+  [
+   "east african rift",
+   "East African Rift"
+  ]
+ ],
+ "haversine": [
+  [
+   35.68,
+   139.77,
+   34.05,
+   -118.24,
+   8810.66950761824
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0.0
+  ],
+  [
+   0,
+   0,
+   10,
+   0,
+   1111.950802335329
+  ],
+  [
+   0,
+   0,
+   0,
+   10,
+   1111.950802335329
+  ],
+  [
+   51.5,
+   -0.12,
+   48.85,
+   2.35,
+   343.1283517719462
+  ],
+  [
+   -33.9,
+   151.2,
+   -41.3,
+   174.8,
+   2227.1440016235683
+  ],
+  [
+   89,
+   0,
+   -89,
+   180,
+   20015.114442035923
+  ],
+  [
+   10,
+   179,
+   10,
+   -179,
+   219.0112188995563
+  ],
+  [
+   35.0,
+   139.0,
+   35.7,
+   139.7,
+   100.44335325857752
+  ]
+ ],
+ "bearing": [
+  [
+   35.68,
+   139.77,
+   34.05,
+   -118.24,
+   55.587375722579225
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0.0
+  ],
+  [
+   0,
+   0,
+   10,
+   0,
+   0.0
+  ],
+  [
+   0,
+   0,
+   0,
+   10,
+   90.0
+  ],
+  [
+   51.5,
+   -0.12,
+   48.85,
+   2.35,
+   148.2102556484632
+  ],
+  [
+   -33.9,
+   151.2,
+   -41.3,
+   174.8,
+   118.57896878167577
+  ],
+  [
+   89,
+   0,
+   -89,
+   180,
+   90.0
+  ],
+  [
+   10,
+   179,
+   10,
+   -179,
+   89.82633471992932
+  ],
+  [
+   35.0,
+   139.0,
+   35.7,
+   139.7,
+   38.99983909566561
+  ]
+ ],
+ "compass": [
+  [
+   0,
+   "N"
+  ],
+  [
+   11,
+   "N"
+  ],
+  [
+   22.4,
+   "NNE"
+  ],
+  [
+   22.6,
+   "NNE"
+  ],
+  [
+   45,
+   "NE"
+  ],
+  [
+   90,
+   "E"
+  ],
+  [
+   135,
+   "SE"
+  ],
+  [
+   180,
+   "S"
+  ],
+  [
+   225,
+   "SW"
+  ],
+  [
+   270,
+   "W"
+  ],
+  [
+   315,
+   "NW"
+  ],
+  [
+   337.4,
+   "NNW"
+  ],
+  [
+   337.6,
+   "NNW"
+  ],
+  [
+   359.9,
+   "N"
+  ]
+ ],
+ "formatKm": [
+  [
+   0.04,
+   "0.0 km"
+  ],
+  [
+   3.14,
+   "3.1 km"
+  ],
+  [
+   9.99,
+   "10.0 km"
+  ],
+  [
+   10.4,
+   "10 km"
+  ],
+  [
+   99.5,
+   "100 km"
+  ],
+  [
+   842.3,
+   "842 km"
+  ],
+  [
+   999.4,
+   "999 km"
+  ],
+  [
+   1001.0,
+   "1,001 km"
+  ],
+  [
+   12345.6,
+   "12,346 km"
+  ]
+ ],
+ "radius": [
+  [
+   -1,
+   25.0
+  ],
+  [
+   0,
+   25.0
+  ],
+  [
+   2,
+   25.0
+  ],
+  [
+   3.5,
+   25.0
+  ],
+  [
+   4,
+   25.0
+  ],
+  [
+   5,
+   25.0
+  ],
+  [
+   5.5,
+   25.0
+  ],
+  [
+   6,
+   25.0
+  ],
+  [
+   6.5,
+   37.24699657943356
+  ],
+  [
+   7,
+   73.46682290526692
+  ],
+  [
+   7.5,
+   144.90763184847196
+  ],
+  [
+   8,
+   285.81910769448695
+  ],
+  [
+   9,
+   400.0
+  ],
+  [
+   9.5,
+   400.0
+  ]
+ ],
+ "boxContains": [
+  [
+   [
+    24.0,
+    46.0,
+    122.0,
+    146.5
+   ],
+   35.7,
+   139.7,
+   true
+  ],
+  [
+   [
+    24.0,
+    46.0,
+    122.0,
+    146.5
+   ],
+   35.7,
+   -120.0,
+   false
+  ],
+  [
+   [
+    -23.5,
+    -15.0,
+    183.0,
+    188.0
+   ],
+   -18.0,
+   -174.0,
+   true
+  ],
+  [
+   [
+    -23.5,
+    -15.0,
+    183.0,
+    188.0
+   ],
+   -18.0,
+   100.0,
+   false
+  ],
+  [
+   [
+    -21.0,
+    -15.5,
+    176.0,
+    183.0
+   ],
+   -17.0,
+   178.0,
+   true
+  ],
+  [
+   [
+    -21.0,
+    -15.5,
+    176.0,
+    183.0
+   ],
+   -17.0,
+   -178.0,
+   true
+  ],
+  [
+   [
+    -48.0,
+    -33.0,
+    165.0,
+    180.0
+   ],
+   -41.0,
+   174.0,
+   true
+  ],
+  [
+   [
+    -48.0,
+    -33.0,
+    165.0,
+    180.0
+   ],
+   -41.0,
+   -175.0,
+   false
+  ]
+ ],
+ "sequences": [
+  {
+   "name": "empty",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -432000.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [],
+   "verdict": "No aftershocks recorded above the search magnitude - either it is quiet or smaller events are below the floor.",
+   "bath": null,
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "first": 0,
+   "last": 0,
+   "elapsed": 5.0,
+   "largest": null
+  },
+  {
+   "name": "empty, bigger foreshock",
+   "main": {
+    "id": "main",
+    "mag": 5.0,
+    "t": -432000.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [
+    {
+     "id": "b0",
+     "mag": 6.2,
+     "t": -439200.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "after": [],
+   "verdict": "No aftershocks recorded above the search magnitude - either it is quiet or smaller events are below the floor. A larger event (M6.2) came first, so this looks like an aftershock itself.",
+   "bath": null,
+   "counts": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "first": 0,
+   "last": 0,
+   "elapsed": 5.0,
+   "largest": null
+  },
+  {
+   "name": "first 24 hours",
+   "main": {
+    "id": "main",
+    "mag": 6.5,
+    "t": -21600.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 5.0,
+     "t": -18000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.1,
+     "t": -14400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "Still in the first 24 hours, when the rate is highest and revisions are common.",
+   "bath": 1.5,
+   "counts": [
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "first": 2,
+   "last": 2,
+   "elapsed": 0.25,
+   "largest": 5.0
+  },
+  {
+   "name": "decaying",
+   "main": {
+    "id": "main",
+    "mag": 6.5,
+    "t": -345600.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 5.3,
+     "t": -342000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 5.3,
+     "t": -338400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a2",
+     "mag": 5.3,
+     "t": -334800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a3",
+     "mag": 5.3,
+     "t": -331200.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a4",
+     "mag": 5.3,
+     "t": -327600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a5",
+     "mag": 5.3,
+     "t": -324000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a6",
+     "mag": 5.3,
+     "t": -320400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a7",
+     "mag": 5.3,
+     "t": -316800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a8",
+     "mag": 5.3,
+     "t": -313200.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a9",
+     "mag": 5.3,
+     "t": -309600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a10",
+     "mag": 5.3,
+     "t": -306000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a11",
+     "mag": 5.3,
+     "t": -302400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a12",
+     "mag": 5.3,
+     "t": -298800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a13",
+     "mag": 5.3,
+     "t": -295200.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a14",
+     "mag": 4.0,
+     "t": -82800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is decaying as you would expect, from 14 on day one to 1 in the last 24 hours.",
+   "bath": 1.2000000000000002,
+   "counts": [
+    14,
+    0,
+    0,
+    1,
+    0
+   ],
+   "first": 14,
+   "last": 1,
+   "elapsed": 4.0,
+   "largest": 5.3
+  },
+  {
+   "name": "quiet for a day",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 4.5,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -241200.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "Nothing in the last 24 hours - the sequence looks to have quietened down.",
+   "bath": 1.5,
+   "counts": [
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "first": 2,
+   "last": 0,
+   "elapsed": 3.0,
+   "largest": 4.5
+  },
+  {
+   "name": "steady",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 4.0,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -252000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a2",
+     "mag": 4.0,
+     "t": -248400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a3",
+     "mag": 4.0,
+     "t": -57600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a4",
+     "mag": 4.0,
+     "t": -54000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a5",
+     "mag": 4.0,
+     "t": -50400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is holding roughly steady at 3 per day.",
+   "bath": 2.0,
+   "counts": [
+    3,
+    0,
+    3,
+    0,
+    0
+   ],
+   "first": 3,
+   "last": 3,
+   "elapsed": 3.0,
+   "largest": 4.0
+  },
+  {
+   "name": "accelerating",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 4.0,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -82800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a2",
+     "mag": 4.0,
+     "t": -79200.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a3",
+     "mag": 4.0,
+     "t": -75600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a4",
+     "mag": 4.0,
+     "t": -72000.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a5",
+     "mag": 4.0,
+     "t": -68400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a6",
+     "mag": 4.0,
+     "t": -64800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is higher now (6 in 24h) than on day one (1) - worth watching.",
+   "bath": 2.0,
+   "counts": [
+    1,
+    0,
+    6,
+    0,
+    0
+   ],
+   "first": 1,
+   "last": 6,
+   "elapsed": 3.0,
+   "largest": 4.0
+  },
+  {
+   "name": "small gap",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 5.8,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -68400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is holding roughly steady at 1 per day. The largest aftershock is within 0.2 of the mainshock, closer than the usual gap of about 1.2.",
+   "bath": 0.20000000000000018,
+   "counts": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "first": 1,
+   "last": 1,
+   "elapsed": 3.0,
+   "largest": 5.8
+  },
+  {
+   "name": "gap 0.4",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 5.6,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -68400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is holding roughly steady at 1 per day. The largest aftershock is within 0.4 of the mainshock, closer than the usual gap of about 1.2.",
+   "bath": 0.40000000000000036,
+   "counts": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "first": 1,
+   "last": 1,
+   "elapsed": 3.0,
+   "largest": 5.6
+  },
+  {
+   "name": "gap 0.6",
+   "main": {
+    "id": "main",
+    "mag": 6.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 5.4,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -68400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is holding roughly steady at 1 per day.",
+   "bath": 0.5999999999999996,
+   "counts": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "first": 1,
+   "last": 1,
+   "elapsed": 3.0,
+   "largest": 5.4
+  },
+  {
+   "name": "later one was larger",
+   "main": {
+    "id": "main",
+    "mag": 5.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 5.6,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -68400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "The rate is holding roughly steady at 1 per day. A later event was larger, so this was a foreshock.",
+   "bath": -0.5999999999999996,
+   "counts": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "first": 1,
+   "last": 1,
+   "elapsed": 3.0,
+   "largest": 5.6
+  },
+  {
+   "name": "foreshock and aftershocks",
+   "main": {
+    "id": "main",
+    "mag": 5.0,
+    "t": -259200.0,
+    "lat": 10.0,
+    "lon": 20.0,
+    "place": "p"
+   },
+   "before": [
+    {
+     "id": "b0",
+     "mag": 6.0,
+     "t": -262800.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "after": [
+    {
+     "id": "a0",
+     "mag": 4.0,
+     "t": -255600.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    },
+    {
+     "id": "a1",
+     "mag": 4.0,
+     "t": -68400.0,
+     "lat": 10.0,
+     "lon": 20.0,
+     "place": "p"
+    }
+   ],
+   "verdict": "A larger event (M6.0) came first, so this is part of that sequence rather than its mainshock. The rate is holding roughly steady at 1 per day.",
+   "bath": 1.0,
+   "counts": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "first": 1,
+   "last": 1,
+   "elapsed": 3.0,
+   "largest": 4.0
+  }
+ ],
+ "activities": [
+  {
+   "label": "a",
+   "recent": 100,
+   "baseline": 365,
+   "expected": 30.0,
+   "ratio": 3.3333333333333335,
+   "verdict": "100 events, far above the usual 30 for 30 days (3.3x the 12-month rate)."
+  },
+  {
+   "label": "b",
+   "recent": 300,
+   "baseline": 365,
+   "expected": 30.0,
+   "ratio": 10.0,
+   "verdict": "300 events, far above the usual 30 for 30 days (10.0x the 12-month rate)."
+  },
+  {
+   "label": "c",
+   "recent": 30,
+   "baseline": 365,
+   "expected": 30.0,
+   "ratio": 1.0,
+   "verdict": "About normal: 30 events against roughly 30 expected over 30 days."
+  },
+  {
+   "label": "d",
+   "recent": 6,
+   "baseline": 365,
+   "expected": 30.0,
+   "ratio": 0.2,
+   "verdict": "6 events, far below the usual 30 for 30 days (0.2x the 12-month rate)."
+  },
+  {
+   "label": "e",
+   "recent": 2,
+   "baseline": 24,
+   "expected": 1.9726027397260273,
+   "ratio": 1.0138888888888888,
+   "verdict": "Too few events either way (2 against about 2 expected) to read much into it."
+  },
+  {
+   "label": "f",
+   "recent": 10,
+   "baseline": null,
+   "expected": null,
+   "ratio": null,
+   "verdict": "Not enough history to judge."
+  },
+  {
+   "label": "g",
+   "recent": 50,
+   "baseline": 1372,
+   "expected": 112.76712328767123,
+   "ratio": 0.44339164237123424,
+   "verdict": "50 events, below the usual 113 for 30 days (0.4x the 12-month rate)."
+  },
+  {
+   "label": "h",
+   "recent": 9,
+   "baseline": 240,
+   "expected": 19.726027397260275,
+   "ratio": 0.45625,
+   "verdict": "9 events, below the usual 20 for 30 days (0.5x the 12-month rate)."
+  },
+  {
+   "label": "i",
+   "recent": 0,
+   "baseline": 0,
+   "expected": 0.0,
+   "ratio": null,
+   "verdict": "Not enough history to judge."
+  }
+ ]
+}

@@ -5,3 +5,6 @@ __pycache__/
 quakes-*.csv
 
 .DS_Store
+
+# local tooling config
+.claude/
