@@ -7,7 +7,8 @@ aftershock sequence around any event, see whether a region's recent activity
 is unusual, and plot it all on a world map.
 
 - **Terminal:** `./quakeboard` — Python standard library only. See [Quick start](#quick-start-terminal).
-- **Web:** `web/index.html` — one self-contained file. See [Web app](#web-app).
+- **Web:** `web/index.html` — one self-contained file, live at
+  **<https://hendrikfernandez-thryv.github.io/quakeboard/>**. See [Web app](#web-app).
 
 Data comes from the [USGS earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/).
 No API key, no account, no third-party packages — Python 3.6+ and its standard
@@ -33,8 +34,9 @@ the key list, `q` to quit.
 ## Web app
 
 `web/index.html` is the same monitor as a single page: one self-contained file
-with no server, no install and no dependencies. Open it in a browser, or serve
-the folder:
+with no server, no install and no dependencies. It is live at
+<https://hendrikfernandez-thryv.github.io/quakeboard/>, or you can run it
+yourself: open it in a browser, or serve the folder:
 
 ```bash
 open web/index.html                   # macOS; or just double-click it
@@ -86,6 +88,14 @@ what is shown instead of downloading the whole feed and filtering it.
 **Privacy.** The only network requests are to `earthquake.usgs.gov`. There is no
 analytics, no third-party script or font, and no server. Settings, saved
 searches and a few cached responses live in your browser's `localStorage`.
+
+**Publishing.** The live site is served by GitHub Pages, which is free for
+public repositories. Every push to `main` that touches `web/` runs
+`.github/workflows/pages.yml`, which publishes `web/index.html` only if it is
+exactly what `tools/build_web.py` builds from `web/src` and the Node tests pass.
+So after changing anything in `web/src`, rebuild and commit `web/index.html`
+too, or the deploy will stop at that check. You can also start it by hand from
+the repository's Actions tab.
 
 **Working on it.** The page is assembled from `web/src/` by a small script:
 
