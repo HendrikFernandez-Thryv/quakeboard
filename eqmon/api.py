@@ -158,22 +158,35 @@ def _iso(dt):
     return dt.strftime("%Y-%m-%dT%H:%M:%S")
 
 
-def _window(days, start=None, end=None):
-    if end is None:
-        end = datetime.now(timezone.utc)
+def _floor(dt, seconds):
+    """Round a moment down to a multiple of ``seconds``.
+
+    A search URL is also its cache key. Stamping it with the current second
+    meant no two searches ever shared one, so the cache could never hit.
+    """
+    stamp = int(dt.timestamp())
+    return datetime.fromtimestamp(stamp - stamp % seconds, tz=timezone.utc)
+
+
+def _window(days, start=None, quantize=60):
     if start is None:
-        start = end - timedelta(days=max(0.01, float(days)))
-    return start, end
+        ago = datetime.now(timezone.utc) - timedelta(days=max(0.01, float(days)))
+        start = _floor(ago, quantize)
+    return start
 
 
 def query_params(min_mag=None, days=30, bbox=None, center=None,
                  radius_km=None, limit=500, max_mag=None, max_depth=None,
-                 min_depth=None, end=None, start=None):
-    """Build the shared FDSN parameter list for query and count."""
-    start, end = _window(days, start, end)
-    params = [("format", "geojson"),
-              ("starttime", _iso(start)),
-              ("endtime", _iso(end))]
+                 min_depth=None, end=None, start=None, quantize=60):
+    """Build the shared FDSN parameter list for query and count.
+
+    ``endtime`` is left off unless given, so the server defaults it to now
+    and the URL stays identical for as long as ``quantize`` seconds allow.
+    """
+    start = _window(days, start, quantize)
+    params = [("format", "geojson"), ("starttime", _iso(start))]
+    if end is not None:
+        params.append(("endtime", _iso(end)))
     if min_mag is not None:
         params.append(("minmagnitude", "%g" % min_mag))
     if max_mag is not None:
@@ -204,6 +217,7 @@ def count(timeout=20.0, min_age=300.0, **kw):
     Returns ``None`` rather than raising, since this only ever adds context.
     """
     kw["limit"] = None
+    kw.setdefault("quantize", 3600)       # counts are context; an hour is fine
     url = COUNT_URL + "?" + urllib.parse.urlencode(query_params(**kw))
     try:
         payload, _, _ = _fetch_json(url, timeout=timeout, attempts=1,

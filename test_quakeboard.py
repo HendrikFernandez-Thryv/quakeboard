@@ -434,6 +434,41 @@ class TestPlainOutput(unittest.TestCase):
         self.assertIn("Japan", out.getvalue())
 
 
+class TestQueryUrls(unittest.TestCase):
+    """Search URLs are cache keys, so they must not change every second."""
+
+    def test_floor_rounds_down(self):
+        from datetime import datetime, timezone
+        from eqmon import api
+        t = datetime(2026, 9, 30, 12, 34, 59, tzinfo=timezone.utc)
+        self.assertEqual(api._floor(t, 60),
+                         datetime(2026, 9, 30, 12, 34, 0, tzinfo=timezone.utc))
+        self.assertEqual(api._floor(t, 3600),
+                         datetime(2026, 9, 30, 12, 0, 0, tzinfo=timezone.utc))
+
+    def test_no_endtime_by_default(self):
+        from eqmon import api
+        keys = [k for k, _ in api.query_params(min_mag=4.0, days=30)]
+        self.assertIn("starttime", keys)
+        self.assertNotIn("endtime", keys)
+
+    def test_explicit_window_is_preserved(self):
+        from datetime import datetime, timezone
+        from eqmon import api
+        a = datetime(2026, 1, 1, tzinfo=timezone.utc)
+        b = datetime(2026, 1, 2, tzinfo=timezone.utc)
+        params = dict(api.query_params(start=a, end=b))
+        self.assertEqual(params["starttime"], "2026-01-01T00:00:00")
+        self.assertEqual(params["endtime"], "2026-01-02T00:00:00")
+
+    def test_start_is_stable_within_the_quantum(self):
+        from eqmon import api
+        first = dict(api.query_params(days=30, quantize=3600))["starttime"]
+        second = dict(api.query_params(days=30, quantize=3600))["starttime"]
+        self.assertEqual(first[:13], second[:13])      # same hour
+        self.assertEqual(first[14:], "00:00")          # minutes and seconds zeroed
+
+
 class TestUiHelpers(unittest.TestCase):
     def test_spark(self):
         self.assertEqual(ui.spark([]), "")
@@ -477,7 +512,7 @@ if __name__ == "__main__":
     suite = unittest.TestSuite()
     cases = [TestModel, TestGeo, TestRegions, TestCache, TestConfig, TestMap,
              TestSequence, TestActivity, TestWatchFilter, TestPlainOutput,
-             TestUiHelpers]
+             TestQueryUrls, TestUiHelpers]
     if net:
         cases.append(TestLive)
     for case in cases:

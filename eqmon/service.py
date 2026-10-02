@@ -262,11 +262,10 @@ def sequence(main, radius_km=None, days=None, min_mag=None, limit=2000):
         # without dragging in every microquake the network recorded.
         min_mag = max(1.0, (main.magnitude - 3.0) if main.mag else 1.0)
 
-    end = datetime.now(timezone.utc)
     start = datetime.fromtimestamp(main.epoch, tz=timezone.utc) \
         - timedelta(days=min(30.0, days))
     res = api.search(min_mag=min_mag, center=(main.lat, main.lon),
-                     radius_km=radius_km, limit=limit, start=start, end=end,
+                     radius_km=radius_km, limit=limit, start=start,
                      with_total=False)
     before, after = [], []
     for q in res.quakes:
